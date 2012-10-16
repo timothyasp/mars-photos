@@ -19,4 +19,5 @@ https://www.dropbox.com/sh/x6ta5as2pgke7by/WsxnUG3kJI
 JPL has an exhaustive image library here (http://photojournal.jpl.nasa.gov/)
 
 Full TIFF directory listing - http://photojournal.jpl.nasa.gov/tiff
+
 Full JPEG directory listing - http://photojournal.jpl.nasa.gov/jpeg
