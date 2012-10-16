@@ -32,10 +32,13 @@ def downloadImage(subdir, imgdir, url):
         os.makedirs(imgdir)
 
     filepath = imgdir + '/' + filename
-    print "Saving to " + filepath
-    output = open(filepath, 'wb')
-    output.write(response.read())
-    output.close()
+    if not os.path.isfile(filepath):
+        print "Saving to " + filepath
+        output = open(filepath, 'wb')
+        output.write(response.read())
+        output.close()
+    else:
+        print "Already downloaded, skipping"
 
 def main():
 
@@ -45,7 +48,6 @@ def main():
 # TODO: Make this dynamic
     numpages = 46
 
-    images = set();
     for pageNum in range(1, numpages):
         curPage = buildPageUrl(pageNum)
         print "\n\n##############################"
@@ -72,11 +74,11 @@ def main():
                     downloadImage(dateText, title, img)
 
             else: 
-                print "Skipping "
-                #linkSoup.find(text="Full Resolution")
+                images = linkSoup.find(text=re.compile(' Full Resolution'))
+                if not images == None:
+                    img = images.findParent('a')['href']
+                    downloadImage(dateText, title, img) 
 
-    for image in images:
-        print baseurl+image
 
 if __name__ == '__main__':
     main()
